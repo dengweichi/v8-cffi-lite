@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.1)
-project(v8_ffi)
+project(v8-cffi-lite)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -20,22 +20,22 @@ if(NOT(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "x86_64"))
 endif()
 
 # 如果没有拉去lib-cffi 库。执行拉取
-if (NOT EXISTS "${PROJECT_SOURCE_DIR}/lib-cffi/CMakeLists.txt" )
+if (NOT EXISTS "${PROJECT_SOURCE_DIR}/lib-cffi-lite/CMakeLists.txt" )
     message(STATUS "lib-cffi download ........")
-    execute_process(COMMAND git clone https://github.com/dengweichi/lib-cffi.git  WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR})
+    execute_process(COMMAND git clone https://github.com/dengweichi/lib-cffi-lite.git  WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR})
 endif()
 
 # 判断是否拉取lib-cffi库
-if (NOT EXISTS "${PROJECT_SOURCE_DIR}/lib-cffi/CMakeLists.txt" )
-    message(SEND_ERROR "please execute command git clone https://github.com/dengweichi/lib-cffi.git in root dir")
+if (NOT EXISTS "${PROJECT_SOURCE_DIR}/lib-cffi-lite/CMakeLists.txt" )
+    message(SEND_ERROR "please execute command git clone https://github.com/dengweichi/lib-cffi.git in project root dir")
 endif ()
 
-add_subdirectory(./lib-cffi)
-include_directories(./lib-cffi/include)
+add_subdirectory(./lib-cffi-lite)
+include_directories(./lib-cffi-lite/include)
 
 include_directories(${PROJECT_SOURCE_DIR}/v8/include/)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -pthread -DV8_COMPRESS_POINTERS")
 add_executable(${PROJECT_NAME}
         ./src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/v8/lib/libv8_monolith.a ${PROJECT_SOURCE_DIR}/v8/lib/libv8_libplatform.a ${PROJECT_SOURCE_DIR}/v8/lib/libv8_libbase.a)
-target_link_libraries(${PROJECT_NAME} lib-cffi lib-cffi)
+target_link_libraries(${PROJECT_NAME} lib-cffi-lite lib-cffi-lite)

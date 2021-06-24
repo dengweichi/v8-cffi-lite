@@ -1,3 +1,3 @@
-# v8-ffi
+# v8-cffi-lite
 
-使用lin-cffi和v8实现javaScript导入共享库
+使用lib-cffi-lite和v8实现javaScript导入共享库
