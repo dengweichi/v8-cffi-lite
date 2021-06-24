@@ -3,7 +3,7 @@ project(v8-cffi-lite)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(CMAKE_VERBOSE_MAKEFILE ON)
+#set(CMAKE_VERBOSE_MAKEFILE ON)
 # 只支持linux系统
 if(NOT(CMAKE_SYSTEM_NAME STREQUAL "Linux"))
     message(SEND_ERROR "only support linux system")
@@ -39,3 +39,5 @@ add_executable(${PROJECT_NAME}
         ./src/main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/v8/lib/libv8_monolith.a ${PROJECT_SOURCE_DIR}/v8/lib/libv8_libplatform.a ${PROJECT_SOURCE_DIR}/v8/lib/libv8_libbase.a)
 target_link_libraries(${PROJECT_NAME} lib-cffi-lite lib-cffi-lite)
+
+file(COPY ./resource DESTINATION ${CMAKE_BINARY_DIR})
