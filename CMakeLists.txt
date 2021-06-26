@@ -21,7 +21,7 @@ endif()
 
 # 如果没有拉去lib-cffi 库。执行拉取
 if (NOT EXISTS "${PROJECT_SOURCE_DIR}/lib-cffi-lite/CMakeLists.txt" )
-    message(STATUS "lib-cffi download ........")
+    message(STATUS "lib-cffi-lite download ........")
     execute_process(COMMAND git clone https://github.com/dengweichi/lib-cffi-lite.git  WORKING_DIRECTORY  ${PROJECT_SOURCE_DIR})
 endif()
 
